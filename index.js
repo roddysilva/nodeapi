@@ -1,6 +1,7 @@
 const { json } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
+const urlMongo = require('../nodeapi/support/config/db.config').url;
 require('dotenv').config();
 
 const app = express();
@@ -23,10 +24,10 @@ const orderRoutes = require('./routes/orderRoutes');
 app.use('/order', orderRoutes);
 
 
-
-mongoose.connect(process.env.URLDB)
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
+mongoose.connect(urlMongo)
 .then(() => {
     console.log('Conectamos ao MongoBD!');
-    app.listen(3000)
+    app.listen(PORT)
 })
 .catch((err) => console.group(err));
