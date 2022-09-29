@@ -1,0 +1,11 @@
+mongo-container:
+  image: mongo:3.6.23
+  environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootPassXXX
+  ports:
+    - "27017:27017"
+  volumes:
+    - /docker/mongo/datadir:/data/db
+    - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+  command: mongod
